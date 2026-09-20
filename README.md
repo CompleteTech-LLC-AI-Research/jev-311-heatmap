@@ -47,6 +47,18 @@ The live run excluded 205 reports with missing or invalid coordinates, completed
 
 [All result files](results/2026-09-01/) · [Run metadata and source provenance](results/2026-09-01/run_metadata.json)
 
+### Geographic backgrounds
+
+Published PNGs include NYC borough shorelines, land/water shading, and borough labels. Background geometry comes from [NYC Department of City Planning, release 26b](https://data.cityofnewyork.us/City-Government/Borough-Boundaries/gthc-hcne). These are geographic reference backgrounds, not street tiles; neighboring land outside NYC is not represented. Interactive HTML retains its OpenStreetMap street basemap.
+
+Download the boundary file locally (it is excluded from Git):
+
+```powershell
+python -c "import requests,pathlib; r=requests.get('https://data.cityofnewyork.us/resource/gthc-hcne.geojson',timeout=60); r.raise_for_status(); pathlib.Path('data').mkdir(exist_ok=True); pathlib.Path('data/nyc_borough_boundaries.geojson').write_text(r.text,encoding='utf-8')"
+```
+
+Add `--background-geojson data/nyc_borough_boundaries.geojson` when generating heatmaps. Existing cached scores can be reused with `--max-api-calls 0`.
+
 ### Open the interactive maps
 
 From the repository directory, run:

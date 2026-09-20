@@ -124,5 +124,13 @@
     "uncertainty_mean",
     "composite"
   ],
-  "omitted_metrics_no_eligible_cells": []
+  "omitted_metrics_no_eligible_cells": [],
+  "png_background": {
+    "source": "https://data.cityofnewyork.us/City-Government/Borough-Boundaries/gthc-hcne",
+    "version": "26b",
+    "sha256": "7aa44d9fb611f2f518a226ff994a6516a261a8ce982ccf1e7b37d663687f443c",
+    "rendered_at_utc": "2026-09-20T00:24:47.946034+00:00",
+    "additional_jev_calls": 0,
+    "description": "NYC borough outlines and labels; neighboring land outside NYC not represented."
+  }
 }

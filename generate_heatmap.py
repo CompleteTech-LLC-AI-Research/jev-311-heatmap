@@ -32,6 +32,9 @@ import requests
 from dotenv import load_dotenv
 from branca.colormap import LinearColormap
 from matplotlib.collections import PolyCollection
+from matplotlib.path import Path as PlotPath
+from matplotlib.patches import PathPatch
+import matplotlib.patheffects as path_effects
 from matplotlib.colors import Normalize, to_hex
 from pyproj import Transformer
 
@@ -437,6 +440,32 @@ def eligible_cells(grid: pd.DataFrame, metric: str, args: argparse.Namespace) ->
     return grid[mask].copy()
 
 
+def draw_map_background(ax: Any, path: Path) -> None:
+    """Draw local WGS84 borough polygons in the heatmap's UTM-kilometer coordinates."""
+    background = json.loads(path.read_text(encoding="utf-8"))
+    project = Transformer.from_crs("EPSG:4326", "EPSG:32618", always_xy=True)
+    ax.set_facecolor("#deedf3")
+    for feature in background["features"]:
+        geometry = feature["geometry"]
+        polygons = geometry["coordinates"] if geometry["type"] == "MultiPolygon" else [geometry["coordinates"]]
+        for polygon in polygons:
+            vertices, codes = [], []
+            for ring in polygon:
+                x, y = project.transform(*zip(*ring))
+                vertices.extend(zip(np.array(x) / 1000, np.array(y) / 1000))
+                codes.extend([PlotPath.MOVETO] + [PlotPath.LINETO] * (len(ring) - 2) + [PlotPath.CLOSEPOLY])
+            ax.add_patch(PathPatch(PlotPath(vertices, codes), facecolor="#f4f1e9",
+                                   edgecolor="#8899a0", linewidth=0.55, zorder=0))
+    labels = {"MANHATTAN": (-73.975, 40.79), "BRONX": (-73.855, 40.865),
+              "QUEENS": (-73.80, 40.72), "BROOKLYN": (-73.945, 40.64),
+              "STATEN ISLAND": (-74.15, 40.575)}
+    for label, (lon, lat) in labels.items():
+        x, y = project.transform(lon, lat)
+        ax.text(x / 1000, y / 1000, label, ha="center", fontsize=8, weight="bold",
+                color="#243b48", zorder=4,
+                path_effects=[path_effects.withStroke(linewidth=3, foreground="white")])
+
+
 def render_metric(grid: pd.DataFrame, metric: str, spec: tuple[str, str, bool],
                   args: argparse.Namespace, subtitle: str) -> bool:
     title, label, bounded = spec
@@ -452,7 +481,11 @@ def render_metric(grid: pd.DataFrame, metric: str, spec: tuple[str, str, bool],
         x, y, size = row.x0_m / 1000, row.y0_m / 1000, args.cell_m / 1000
         rectangles.append([(x, y), (x + size, y), (x + size, y + size), (x, y + size)])
     fig, ax = plt.subplots(figsize=(10, 10))
-    collection = PolyCollection(rectangles, array=values, cmap=cmap, norm=norm, edgecolors="none")
+    background = getattr(args, "background_geojson", None)
+    if background:
+        draw_map_background(ax, background)
+    collection = PolyCollection(rectangles, array=values, cmap=cmap, norm=norm, edgecolors="none",
+                                alpha=0.78 if background else 1.0, zorder=2)
     ax.add_collection(collection)
     # Identical extents across all figures in a run support honest visual comparisons.
     margin = args.cell_m / 1000
@@ -464,6 +497,8 @@ def render_metric(grid: pd.DataFrame, metric: str, spec: tuple[str, str, bool],
     ax.set_title(f"{title}\n{subtitle}", fontsize=12)
     fig.colorbar(collection, ax=ax, shrink=0.75, label=label)
     note = "Blank cells: no mappable observations or insufficient model-scored support; not evidence of no problem."
+    if background:
+        note += "\nBackground: NYC Department of City Planning borough boundaries (26b). Water shading outside NYC includes unmapped neighboring land."
     fig.text(0.5, 0.015, note, ha="center", va="bottom", fontsize=8, wrap=True)
     fig.tight_layout(rect=(0, 0.04, 1, 1))
     fig.savefig(args.output_dir / f"{metric}.png", dpi=args.dpi)
@@ -564,6 +599,7 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--min-count", type=int, default=3, help="Minimum scored requests per displayed semantic cell.")
     p.add_argument("--min-coverage", type=float, default=0.9, help="Minimum scoring coverage per displayed semantic cell.")
     p.add_argument("--dpi", type=int, default=300)
+    p.add_argument("--background-geojson", type=Path, help="Local WGS84 NYC borough boundaries for PNG backgrounds.")
     p.add_argument("--category-maps", action="store_true", help="Also render seven fractional category-mass maps.")
     p.add_argument("--dry-run", action="store_true", help="Validate input and report cache/call requirements without calling JEV or rendering.")
     p.add_argument("--overwrite", action="store_true", help="Allow replacing generated files in a nonempty output directory.")
@@ -599,6 +635,10 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "state_fields_sent_to_jev": list(STATE_FIELDS) if args.mode == "jev" else [],
         "questions": QUESTIONS if args.mode == "jev" else None,
         "grid_crs": "EPSG:32618 (UTM zone 18N)", "cell_size_m": args.cell_m,
+        "png_background": ({"file": str(args.background_geojson),
+                            "sha256": file_sha256(args.background_geojson),
+                            "source": "https://data.cityofnewyork.us/City-Government/Borough-Boundaries/gthc-hcne"}
+                           if args.background_geojson else None),
         "display_min_scored_count": args.min_count, "display_min_scoring_coverage": args.min_coverage,
         "composite_formula": "0.50*mean(severity_raw/4) + 0.30*mean(safety_probability) + 0.20*log1p(raw_count)/log1p(max_raw_count)",
         "ambiguity_formula_per_request": "((1-severity_confidence)+(1-category_confidence)+4*p*(1-p))/3, where p=safety_probability",
