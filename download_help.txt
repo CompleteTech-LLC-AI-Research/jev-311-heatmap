@@ -1,0 +1,20 @@
+usage: download_dataset.py [-h] --start START --end END
+                           [--borough {BRONX,BROOKLYN,MANHATTAN,QUEENS,STATEN ISLAND}]
+                           [--output OUTPUT] [--max-rows MAX_ROWS]
+                           [--page-size PAGE_SIZE] [--force]
+
+Download a bounded, ordered NYC 311 dataset slice. Python 3.10+.
+
+Source: https://data.cityofnewyork.us/d/erm2-nwe9
+API: https://dev.socrata.com/docs/queries/
+No TypeSafe credential is needed. SOCRATA_APP_TOKEN is optional.
+
+options:
+  -h, --help            show this help message and exit
+  --start START         Inclusive YYYY-MM-DD, NYC source time.
+  --end END             Exclusive YYYY-MM-DD, NYC source time.
+  --borough {BRONX,BROOKLYN,MANHATTAN,QUEENS,STATEN ISLAND}
+  --output OUTPUT
+  --max-rows MAX_ROWS   Abort rather than truncate above this budget.
+  --page-size PAGE_SIZE
+  --force               Allow replacing the output CSV and metadata.

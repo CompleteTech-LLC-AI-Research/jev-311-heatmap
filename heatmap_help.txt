@@ -1,0 +1,45 @@
+usage: generate_heatmap.py [-h] [--input INPUT] [--output-dir OUTPUT_DIR]
+                           [--mode {jev,baseline}] [--model MODEL]
+                           [--cache CACHE]
+                           [--alias-cache-hours ALIAS_CACHE_HOURS]
+                           [--max-api-calls MAX_API_CALLS]
+                           [--requests-per-second REQUESTS_PER_SECOND]
+                           [--max-attempts MAX_ATTEMPTS] [--cell-m CELL_M]
+                           [--min-count MIN_COUNT]
+                           [--min-coverage MIN_COVERAGE] [--dpi DPI]
+                           [--category-maps] [--dry-run] [--overwrite]
+
+Score NYC 311 complaint descriptions with JEV, then render geographic grid heatmaps.
+
+Python 3.10+. See README.md for commands and interpretation limitations.
+JEV HTTP contract: https://docs.typesafe.ai/api
+No mock/heuristic scores are used by this application. Baseline mode makes no AI calls.
+
+options:
+  -h, --help            show this help message and exit
+  --input INPUT
+  --output-dir OUTPUT_DIR
+  --mode {jev,baseline}
+  --model MODEL         Pinned model by default; accepts a model ID or alias.
+  --cache CACHE
+  --alias-cache-hours ALIAS_CACHE_HOURS
+                        Expiry for moving aliases only; pinned-model cache
+                        does not expire.
+  --max-api-calls MAX_API_CALLS
+                        Hard HTTP-attempt budget per invocation, including
+                        retries.
+  --requests-per-second REQUESTS_PER_SECOND
+  --max-attempts MAX_ATTEMPTS
+                        Maximum attempts per distinct state, bounded by global
+                        budget.
+  --cell-m CELL_M       Projected square-cell size in meters.
+  --min-count MIN_COUNT
+                        Minimum scored requests per displayed semantic cell.
+  --min-coverage MIN_COVERAGE
+                        Minimum scoring coverage per displayed semantic cell.
+  --dpi DPI
+  --category-maps       Also render seven fractional category-mass maps.
+  --dry-run             Validate input and report cache/call requirements
+                        without calling JEV or rendering.
+  --overwrite           Allow replacing generated files in a nonempty output
+                        directory.

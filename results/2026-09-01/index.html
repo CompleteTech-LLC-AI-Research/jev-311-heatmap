@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NYC 311 heatmaps</title><style>
+body {font:16px/1.6 system-ui,sans-serif;max-width:1100px;margin:40px auto;padding:0 24px;}
+td,th {text-align:left;padding:10px 18px 10px 0;vertical-align:top;} table {border-collapse:collapse;}
+</style></head><body><h1>NYC 311 complaint heatmaps</h1><p>2026-09-01 to 2026-09-02 (end exclusive) | 9,698 requests | 500 m cells</p>
+<p>Mode: <strong>jev</strong>. These are reported complaints, not verified incidents,
+current conditions, or population-adjusted risk. Repeated descriptions share cached model judgments.</p>
+<p>Severity and safety layers are separate from complaint count. The composite uses illustrative weights,
+not an empirically validated risk model. Blank cells are not zeros. Sparse semantic cells require at least
+3 scored requests and 90% coverage. All grid values remain in the exports.</p>
+<table><thead><tr><th>Layer</th><th>Map</th><th>Image</th><th>Meaning</th></tr></thead><tbody><tr><td>Reported complaint count</td><td><a href="raw_count.html">Interactive map</a></td><td><a href="raw_count.png">PNG</a></td><td>Requests per occupied grid cell</td></tr>
+<tr><td>Model-scoring coverage</td><td><a href="scored_fraction.html">Interactive map</a></td><td><a href="scored_fraction.png">PNG</a></td><td>Fraction of mappable requests scored (0-1)</td></tr>
+<tr><td>JEV potential-impact severity</td><td><a href="severity_mean.html">Interactive map</a></td><td><a href="severity_mean.png">PNG</a></td><td>Mean normalized rubric position (0-1)</td></tr>
+<tr><td>JEV safety-concern signal</td><td><a href="safety_mean.html">Interactive map</a></td><td><a href="safety_mean.png">PNG</a></td><td>Mean model probability of the defined proposition (0-1)</td></tr>
+<tr><td>JEV answer-ambiguity proxy</td><td><a href="uncertainty_mean.html">Interactive map</a></td><td><a href="uncertainty_mean.png">PNG</a></td><td>Mean ambiguity proxy (0-1), not an error probability</td></tr>
+<tr><td>Exploratory complaint-impact index</td><td><a href="composite.html">Interactive map</a></td><td><a href="composite.png">PNG</a></td><td>Illustrative weighted index (0-1), not validated risk</td></tr></tbody></table>
+<p>Interactive maps use external JavaScript/CSS and OpenStreetMap tiles, requiring internet access.
+The PNGs and this index work offline.</p>
+<p><a href="run_metadata.json">Run metadata and provenance</a>. Raw records and tabular/geospatial exports are intentionally excluded from this public release. Interactive maps embed aggregate grid results only.</p>
+</body></html>

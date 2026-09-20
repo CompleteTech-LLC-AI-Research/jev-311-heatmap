@@ -1,0 +1,38 @@
+test_auth_failure_is_not_retried (test_pipeline.PipelineTests.test_auth_failure_is_not_retried) ... ok
+test_budget_preflight_makes_no_api_calls (test_pipeline.PipelineTests.test_budget_preflight_makes_no_api_calls) ... ok
+test_cache_key_changes_with_model_and_prompt (test_pipeline.PipelineTests.test_cache_key_changes_with_model_and_prompt) ... ok
+test_cache_roundtrip_and_alias_expiry (test_pipeline.PipelineTests.test_cache_roundtrip_and_alias_expiry) ... ok
+test_date_bounds_are_inclusive_exclusive (test_pipeline.PipelineTests.test_date_bounds_are_inclusive_exclusive) ... ok
+test_download_does_not_publish_partial_after_source_growth (test_pipeline.PipelineTests.test_download_does_not_publish_partial_after_source_growth) ... ok
+test_download_exact_page_limit_and_empty_last_page (test_pipeline.PipelineTests.test_download_exact_page_limit_and_empty_last_page) ... ok
+test_download_pagination_and_hash (test_pipeline.PipelineTests.test_download_pagination_and_hash) ... ok
+test_download_rejects_budget_before_fetching_rows (test_pipeline.PipelineTests.test_download_rejects_budget_before_fetching_rows) ... ok
+test_dry_run_makes_no_api_calls (test_pipeline.PipelineTests.test_dry_run_makes_no_api_calls) ... ok
+test_duplicate_download_ids_stop_without_publishing (test_pipeline.PipelineTests.test_duplicate_download_ids_stop_without_publishing) ... ok
+test_full_baseline_render_without_api (test_pipeline.PipelineTests.test_full_baseline_render_without_api) ... ok
+test_full_jev_render_uses_explicit_mock_only_in_test (test_pipeline.PipelineTests.test_full_jev_render_uses_explicit_mock_only_in_test) ... ok
+test_http_request_shape_and_budget (test_pipeline.PipelineTests.test_http_request_shape_and_budget) ... ok
+test_input_metadata_mismatch_stops (test_pipeline.PipelineTests.test_input_metadata_mismatch_stops) ... ok
+test_invalid_date_range_and_archive (test_pipeline.PipelineTests.test_invalid_date_range_and_archive) ... ok
+test_invalid_probability_rejected (test_pipeline.PipelineTests.test_invalid_probability_rejected) ... ok
+test_mean_severity_not_density_and_category_mass_conserved (test_pipeline.PipelineTests.test_mean_severity_not_density_and_category_mass_conserved) ... ok
+test_missing_answer_rejected (test_pipeline.PipelineTests.test_missing_answer_rejected) ... ok
+test_missing_key_does_not_fall_back_to_mock_scores (test_pipeline.PipelineTests.test_missing_key_does_not_fall_back_to_mock_scores) ... ok
+test_nan_and_bool_rejected (test_pipeline.PipelineTests.test_nan_and_bool_rejected) ... ok
+test_old_model_columns_are_ignored (test_pipeline.PipelineTests.test_old_model_columns_are_ignored) ... ok
+test_pagination_has_tie_breaker (test_pipeline.PipelineTests.test_pagination_has_tie_breaker) ... ok
+test_parse_nested_answers_and_zero_based_score (test_pipeline.PipelineTests.test_parse_nested_answers_and_zero_based_score) ... ok
+test_parse_score_optional_probabilities (test_pipeline.PipelineTests.test_parse_score_optional_probabilities) ... ok
+test_quality_filter (test_pipeline.PipelineTests.test_quality_filter) ... ok
+test_repeated_states_scored_once_and_cached_rerun (test_pipeline.PipelineTests.test_repeated_states_scored_once_and_cached_rerun) ... ok
+test_retry_is_bounded_and_counted (test_pipeline.PipelineTests.test_retry_is_bounded_and_counted) ... Transient JEV failure; retrying in 1.0 seconds (attempts used: 1).
+ok
+test_sparse_cells_suppressed_only_for_semantic_maps (test_pipeline.PipelineTests.test_sparse_cells_suppressed_only_for_semantic_maps) ... ok
+test_sql_escaping (test_pipeline.PipelineTests.test_sql_escaping) ... ok
+test_states_exclude_locations_and_resolution (test_pipeline.PipelineTests.test_states_exclude_locations_and_resolution) ... ok
+test_wrong_distribution_rejected (test_pipeline.PipelineTests.test_wrong_distribution_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 2.616s
+
+OK
