@@ -369,3 +369,7 @@ Documentation checked September 19, 2026:
 - Socrata ordered pagination: https://dev.socrata.com/docs/queries/order.html
 - Socrata floating timestamps: https://dev.socrata.com/docs/datatypes/floating_timestamp.html
 - Folium GeoJSON: https://python-visualization.github.io/folium/latest/user_guide/geojson/geojson.html
+
+## License
+
+Code and documentation are released under the [MIT License](LICENSE). NYC 311 and boundary data remain subject to the NYC Open Data terms of use.
