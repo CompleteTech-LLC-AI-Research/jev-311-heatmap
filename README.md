@@ -4,12 +4,66 @@
 
 **From reported conditions to explorable city-scale signals.**
 
-A research demonstration by **CompleteTech LLC AI Research**  
+A research demonstration by **CompleteTech LLC AI Research**<br>
 Python · TypeSafe JEV · NYC Open Data · Folium
 
 [Explore results](#a-day-in-new-york) · [Get started](#1-install) · [Methodology](#aggregation-and-formulas) · [Verification](TESTING.md)
 
 </div>
+
+---
+
+## England crime map
+
+An additional map covers **England, July 2026**, the latest Police.uk month available when retrieved on September 30, 2026.
+
+Open [the interactive England map](results/england/2026-07/index.html). It displays **408,722 mappable recorded crimes**, with filters for all 14 published categories. An optional combined view includes **87,621 anti-social behaviour records**. Counts use 2 km squares in British National Grid (EPSG:27700); colours use a logarithmic scale. Click cells for category breakdowns.
+
+The official [Police.uk custom CSV download](https://data.police.uk/data/) supplies the records under the Open Government Licence v3.0. England membership uses `LSOA code` beginning `E01`, including any records supplied by Welsh forces assigned to English LSOAs. Records without an LSOA are excluded because their country cannot be established by this rule. Country-border cells can extend beyond England; only English-assigned records contribute. Published locations are anonymised approximations.
+
+**Coverage gaps:** July crime files are absent for British Transport Police, Gloucestershire, Greater Manchester and North Yorkshire, consistent with the [official changelog](https://data.police.uk/changelog/). This is a map of available recorded data, not complete crime coverage or population-adjusted risk. The default view excludes ASB. No JEV inference is used for this map.
+
+To view locally:
+
+```powershell
+python -m http.server 8766 --bind 127.0.0.1 --directory results
+```
+
+Visit **http://127.0.0.1:8766/england/2026-07/index.html**. Internet access is needed for Leaflet and the OpenStreetMap basemap. Use the overlay opacity slider to reveal roads and place names.
+
+To reproduce (using `requests` and `pyproj` from `requirements.txt`):
+
+```powershell
+python src/download_england_crime.py --month 2026-07
+python src/generate_england_crime.py --input data/england-crime-2026-07.zip --output-dir results/england/2026-07
+```
+
+Omit `--month` to retrieve the latest available month. The ZIP and its hash receipt stay under ignored `data/`. The map generator verifies the hash, filters English LSOAs, excludes duplicate nonblank crime IDs within each reporting force, preserves ASB records without IDs, and records exclusions and contributing forces in [run metadata](results/england/2026-07/run_metadata.json). The generated map embeds aggregate cell counts only. Changing `--cell-m` regenerates the aggregation.
+
+Verification: all 16 browser selections (14 categories plus both combined views) matched source aggregation totals; cells opened category popups, and basemap tiles loaded successfully. The 549,512 source rows reconcile to 496,343 retained English records, 52,344 non-English or missing-LSOA records, and 825 duplicate crime IDs. Of the excluded records, 21,287 lack an LSOA. Raw ZIPs and standalone grid GeoJSON remain ignored by Git.
+
+### Regional conviction profiles and detailed offences
+
+The map's **Conviction profiles** tab adds the official [MoJ March 2026 Outcomes by Offence release](https://www.gov.uk/government/statistics/criminal-justice-statistics-quarterly-march-2026), covering court outcomes from **April 2025 to March 2026**. Select a police force area from the dropdown or click its polygon; then select an offence group, subtype and detailed Home Office code. The sidebar shows sex, age, broad and detailed ethnicity, unknown-value coverage, quarterly court outcomes, and clickable offence breakdowns.
+
+The default view includes **214,584 indictable-offence conviction occasions** for records classified as persons in published English areas. The optional all-offence view includes **820,587 conviction occasions**. These are not distinct individuals: a person with multiple completed proceedings can appear more than once. The aggregation preserves the principal-offence basis of the source. Companies/public bodies and unknown person classification are excluded; unknown demographic values within included person records remain in chart denominators. The English selection excludes Welsh and unknown force areas. There are **38 published English area profiles**; the separate City of London boundary has no published profile in this extract and is explicitly labelled unavailable, rather than assigned zero convictions.
+
+Across the selected year and person records, the panel exposes **325 offence subtypes and 867 detailed HO codes with convictions**. **Explore weapon offences** opens nine weapon-offence subtypes and 40 detailed codes. Examples include articles with a blade or point in public or on school premises, shotgun possession without a certificate, firearm/imitation-firearm offences, and corrosive substances in public. Codes describe legal offences: a generic offensive-weapon code cannot identify its physical type. The broader weapons group also includes threats, intent, supply, marketing and other offences, so read the selected full code label.
+
+Court profiles are an independent regional context layer. They are never attached as demographic attributes to individual crimes or 2 km cells. Court geography is not offender residence or exact crime location; court completion dates are not crime occurrence dates. Do not calculate conviction rates by dividing these court counts by July crime counts. Summary-offence ethnicity has poor recording coverage, so the default selects indictable-only and triable-either-way offences. Each demographic chart is a separate marginal distribution for the same selected conviction total; charts must not be added together or interpreted as demographic intersections. Force map colours show regional conviction counts, not demographic rates.
+
+Reproduce the enrichment:
+
+```powershell
+python src/download_moj.py
+python src/prepare_moj_enrichment.py
+python src/generate_england_crime.py --input data/england-crime-2026-07.zip --output-dir results/england/2026-07 --convictions data/moj-convictions-2026.json
+python src/verify_moj_enrichment.py
+```
+
+The original 366 MiB ZIP stays under ignored `data/` with its SHA-256 receipt. Preparation streams the 4,146,370-row source CSV, validates demographic margins, and retrieves [ONS December 2024 force boundaries](https://services1.arcgis.com/ESMARspQHYMw9BZ9/arcgis/rest/services/Police_Force_Areas_Dec_2024_EW_BGC/FeatureServer) with display simplification. Boundary names are matched explicitly to MoJ names. The HTML embeds only aggregate counts and regional boundaries. See [enrichment provenance](results/england/2026-07/convictions_metadata.json) and [verification results](results/england/2026-07/enrichment_verification.json).
+
+Verification independently reread the original CSV, reconciled all 38 English area totals and all 40 weapon-code totals, and checked 60,190 demographic margins. Browser checks covered both offence scopes, all offence groups, all 40 weapon codes, all 38 regional profiles, missing-area handling, fiscal-quarter ordering, and switching back to the unchanged July crime-grid counts.
 
 ---
 
