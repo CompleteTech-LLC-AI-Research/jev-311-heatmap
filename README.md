@@ -1,3 +1,13 @@
+<!-- showcase:banner:start -->
+<p align="center">
+  <img src="docs/images/banner.png" alt="jev-311-heatmap by CompleteTech LLC" width="100%">
+</p>
+<!-- showcase:banner:end -->
+
+<!-- showcase:nav:start -->
+**CompleteTech AI Research** · [All repositories](https://github.com/CompleteTech-LLC-AI-Research) · [Contributing](https://github.com/CompleteTech-LLC-AI-Research/.github/blob/main/CONTRIBUTING.md) · [Security](https://github.com/CompleteTech-LLC-AI-Research/.github/blob/main/SECURITY.md)
+<!-- showcase:nav:end -->
+
 <div align="center">
 
 # NYC 311 · JEV Heatmaps
@@ -373,3 +383,21 @@ Documentation checked September 19, 2026:
 ## License
 
 Code and documentation are released under the [MIT License](LICENSE). NYC 311 and boundary data remain subject to the NYC Open Data terms of use.
+
+<!-- showcase:footer:start -->
+<p align="center">
+  <a href="https://www.complete.tech">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/CompleteTech-Skills/github-showcase-skill/main/assets/brand/logo-dark.png">
+      <img src="https://raw.githubusercontent.com/CompleteTech-Skills/github-showcase-skill/main/assets/brand/logo.png" alt="CompleteTech LLC" width="200">
+    </picture>
+  </a>
+  <br>
+  Built by <a href="https://www.complete.tech">CompleteTech LLC</a> · Innovation at Every Integration
+</p>
+<!-- showcase:footer:end -->
+
+<!-- showcase:credit:start -->
+<!-- generated-by: github-showcase-skill v=1.0.0 std=ct-std-v1 -->
+<p align="center"><sub>README styled with <a href="https://github.com/CompleteTech-Skills/github-showcase-skill">github-showcase-skill</a> by CompleteTech LLC · <a href="https://github.com/CompleteTech-Skills/github-showcase-skill#quick-start">Get the skill</a></sub></p>
+<!-- showcase:credit:end -->
