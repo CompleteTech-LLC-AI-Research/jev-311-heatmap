@@ -1,4 +1,28 @@
 {
+ "config_sha256": "09228dc8378c61982db1ba451bb46dc545fdfab2bc45169feb81ff005daf240e",
+ "fingerprint": "f5027b4ceb4b0af6606770b8e6df49120715da759364f80e3a0ca75961d19bde",
+ "inputs": {
+  "description": "NYC 311 complaint heatmaps scored with Jev, from a reproducible pipeline to interactive geographic maps.",
+  "icon_sha256": "25c096c257e33a8cafe3799294e92b656bd5cab87a9ca04f3d9eea30d4e6b191",
+  "language": "HTML",
+  "license": "MIT",
+  "override_sha256": "de5c154df5734ac0fc3a7d44ab5051c7b3fb7ae36b40ddff0e56cd27942838b2",
+  "owner": "CompleteTech-LLC-AI-Research",
+  "repo": "jev-311-heatmap",
+  "topics": [
+   "ai-research",
+   "complete-tech-ai-research",
+   "completetech",
+   "data-visualization",
+   "folium",
+   "heatmap",
+   "jev",
+   "nyc-open-data",
+   "python"
+  ],
+  "type": "research",
+  "visibility": "public"
+ },
  "outputs": {
   "banner.png": {
    "bytes": 89973,
@@ -37,7 +61,7 @@
      "text": "MIT"
     }
    ],
-   "fingerprint": "49e928b17280f297e8f7394fe6c6dc17b5883790833dacb15f5e0470b7fa7f64",
+   "fingerprint": "f5027b4ceb4b0af6606770b8e6df49120715da759364f80e3a0ca75961d19bde",
    "icon_source": "repo",
    "px": [
     2560,
@@ -45,32 +69,22 @@
    ],
    "repository_id": 1377732915,
    "scale": 2,
-   "sha256": "2e34ada2e6dbb8bf809a39a0033b209eb054964185a0ffdc6e2326ba1e207c31",
-   "staged_description": {
-    "live_description_sha256": "97cd515436a1a0e812348e66a3c443b4323c849a977c794b58bd81fbaf7c3fec",
-    "sha256": "e1a7b3d405a61ea01dd9ee25507442f1e437d1aa326a88f10ee7a5697f7bfadf",
-    "text": "NYC 311 complaint heatmaps scored with Jev, from a reproducible pipeline to interactive geographic maps."
-   }
+   "sha256": "2e34ada2e6dbb8bf809a39a0033b209eb054964185a0ffdc6e2326ba1e207c31"
   },
   "card.svg": {
    "bytes": 23997,
-   "fingerprint": "49e928b17280f297e8f7394fe6c6dc17b5883790833dacb15f5e0470b7fa7f64",
+   "fingerprint": "f5027b4ceb4b0af6606770b8e6df49120715da759364f80e3a0ca75961d19bde",
    "repository_id": 1377732915,
-   "sha256": "a5cc667575233e179e45872e81f1d81de31d855d3742047e6b316b57fcbb6a8e",
-   "staged_description": {
-    "live_description_sha256": "97cd515436a1a0e812348e66a3c443b4323c849a977c794b58bd81fbaf7c3fec",
-    "sha256": "e1a7b3d405a61ea01dd9ee25507442f1e437d1aa326a88f10ee7a5697f7bfadf",
-    "text": "NYC 311 complaint heatmaps scored with Jev, from a reproducible pipeline to interactive geographic maps."
-   }
+   "sha256": "a5cc667575233e179e45872e81f1d81de31d855d3742047e6b316b57fcbb6a8e"
   }
  },
  "provenance": {
-  "fingerprint": "1aae00243c2778f42d18c0f210367c68e84f9bb3f171c2ca7a3e62951ba5ef93",
+  "fingerprint": "f5027b4ceb4b0af6606770b8e6df49120715da759364f80e3a0ca75961d19bde",
   "first_run_at": "2026-11-18T23:08:50Z",
-  "last_changed_at": "2026-11-18T23:08:50Z",
-  "last_run_at": "2026-11-18T23:08:50Z",
+  "last_changed_at": "2026-11-18T23:24:56Z",
+  "last_run_at": "2026-11-18T23:24:56Z",
   "publisher": "CompleteTech LLC",
-  "run_count": 1,
+  "run_count": 2,
   "skill": "github-showcase-skill",
   "skill_url": "https://github.com/CompleteTech-Skills/github-showcase-skill",
   "skill_version": "1.0.0",

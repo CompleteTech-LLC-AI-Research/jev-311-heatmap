@@ -1,0 +1,14 @@
+{
+ "outputs": {
+  "social-preview.png": {
+   "bytes": 79392,
+   "fingerprint": "f5027b4ceb4b0af6606770b8e6df49120715da759364f80e3a0ca75961d19bde",
+   "live_social_preview": true,
+   "repository_id": 1377732915,
+   "sha256": "d581c08a7323789610c582d010a556c7a31258a76eb3a5717a6ef1325b4684a7"
+  }
+ },
+ "schema": 1,
+ "skill_version": "1.0.0",
+ "standard": "ct-std-v1"
+}
