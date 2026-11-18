@@ -1,0 +1,7 @@
+# Showcase overrides (schema: github-showcase-skill references/repo-config.schema.json). Content only.
+for: CompleteTech-LLC-AI-Research/jev-311-heatmap
+chips:
+  # Python is the primary language by manifest; the live bar reads HTML until results/** is marked
+  # linguist-generated (content linguist proposal).
+  key: ["NYC Open Data"]
+  attrs: ["Python", "MIT"]
